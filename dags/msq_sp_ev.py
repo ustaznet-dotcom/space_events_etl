@@ -14,7 +14,7 @@ def api_to_mysql():
         print("🚀 Начинаем загрузку из API в MySQL...")
 
         # 1. Получаем данные из API
-        API_URL = "https://ll.thespacedevs.com/2.3.0/events/?mode=list"
+        API_URL = "https://ll.thespacedevs.com/2.3.0/events/?mode=list&limit=100"
         response = requests.get(API_URL, timeout=30)
         data = response.json()
         events = data.get('results', [])
