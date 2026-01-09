@@ -1,0 +1,43 @@
+FROM jupyter/datascience-notebook:python-3.10.6
+
+USER root
+
+# Устанавливаем системные зависимости
+RUN apt-get update && apt-get install -y \
+    curl \
+    wget \
+    git \
+    vim \
+    nano \
+    tree \
+    htop \
+    && rm -rf /var/lib/apt/lists/*
+
+USER ${NB_UID}
+
+# Устанавливаем Python пакеты для ETL
+RUN pip install --no-cache-dir \
+    pandas==2.0.3 \
+    numpy==1.24.3 \
+    matplotlib==3.7.1 \
+    seaborn==0.12.2 \
+    plotly==5.14.1 \
+    requests==2.31.0 \
+    clickhouse-driver==0.2.6 \
+    mysql-connector-python==8.0.33 \
+    sqlalchemy==2.0.15 \
+    psycopg2-binary==2.9.6 \
+    python-dotenv==1.0.0 \
+    jupyterlab-git==0.41.0 \
+    lckr-jupyterlab-variableinspector==3.0.9 \
+    ipython-sql==0.4.1 \
+    notebook==6.5.4
+
+# Создаем рабочую директорию
+WORKDIR /home/jovyan/work
+
+# Настройки Jupyter
+ENV JUPYTER_ENABLE_LAB=yes
+ENV GRANT_SUDO=yes
+ENV CHOWN_HOME=yes
+ENV CHOWN_HOME_OPTS=-R

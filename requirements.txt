@@ -1,0 +1,7 @@
+# requirements.txt
+apache-airflow==2.7.1
+pandas==2.0.3
+clickhouse-driver==0.2.6
+mysql-connector-python==8.0.33
+requests==2.31.0
+python-dotenv==1.0.0

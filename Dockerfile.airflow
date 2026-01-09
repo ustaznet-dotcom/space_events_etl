@@ -1,0 +1,19 @@
+FROM apache/airflow:2.7.1-python3.10
+
+USER root
+
+# Устанавливаем системные зависимости
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    default-libmysqlclient-dev \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
+USER airflow
+
+# Копируем requirements
+COPY requirements.txt /tmp/requirements.txt
+
+# Устанавливаем только внешние зависимости
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
