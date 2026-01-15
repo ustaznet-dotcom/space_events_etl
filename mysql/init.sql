@@ -17,3 +17,10 @@ CREATE TABLE IF NOT EXISTS event_sources (
     source_name VARCHAR(100),
     url VARCHAR(255)
 );
+
+CREATE TABLE events (
+    event_id INT,
+    name VARCHAR(255),
+    source_id INT,  -- ← ссылка на источник
+    FOREIGN KEY (source_id) REFERENCES event_sources(source_id)
+);
